@@ -1,0 +1,27 @@
+name: Python Application Test using GitHub Actions
+
+# Controls when the action will run. Triggers the workflow on push/pull_request but only in main branch.
+on: [push]
+
+# A workflow consist of one or more jobs executed sequentially or in parallel.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    - name: Setup Python 3.12
+      uses: actions/setup-python@v6
+      with:
+        python-version: 3.12
+    - name: Install dependencies
+      run: |
+        make install
+    - name: Lint with PyLint
+      run: |
+        make lint
+    - name: Test with PyTest
+      run: |
+        make test
+    - name: Format code with Python Black
+      run: |
+        make format
